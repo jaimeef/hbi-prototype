@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandstander&family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+model-viewer {
+    width: auto;
+    height: 500px;
+    margin: 0 auto;
+
+}
+
+body {
+    font-family: 'lato', 'sans-serif';
+    color: #FFFFFF;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: full;
+    height: 142px;
+    background: #002864;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0px 0px 5px 5px;
+}
+
+h3 {
+    font-size: 22px;
+    padding-left: 2rem;
+    padding-bottom: 1rem
+}
+
+
+#logo {
+    height: 80px;
+    margin-left: 1rem;
+}
+
+#right-item {
+    color: #FFFFFF;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+#position {
+    padding: 1rem
+}
+
+.position-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.position-button {
+    margin: 1rem;
+    width: 171px;
+    height: 45px;
+    background: #002864;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 19px;
+}
+
+#transparency {
+    background: #002864;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-bottom: 1.5rem;
+    
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+
+}
+
+td {
+    padding: 1rem;
+    padding-left: 2rem;
+    font-size: 19px;
+}
+
+
+    
+    
+}
+
