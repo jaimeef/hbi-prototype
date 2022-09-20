@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="3D viewer prototype test model">
+    <link rel="stylesheet" href="style.css">
+    <title>3D model viewer prototype</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <item id="left-item">
+            <a href="index.html">
+                <img id="logo" src="Assets/banner-device.png" alt="">
+            </a>
+        </item>
+        <item id="right-item">
+            <p><strong>URN:</strong> 123456</p>
+            <p><strong>Patient Name:</strong> John Doe</p>
+            <p><strong>Date of creation:</strong> 31.08.22</p>
+        </item>
+    </header>
+
+
+    <model-viewer id="prostateModel" shadow-intensity="1" src="Assets/labelled_Oct13v2.glb" camera-controls ar ios-src="Assets/labelled_Oct13.usdz">
+
+
+
+
+
+    </model-viewer>
+
+    <section id="position">
+        <div class=position-controls>
+
+            <button class=position-button data-orbit="107.6deg 87.73deg auto">Posterior</button>
+            <button class=position-button data-orbit="-88.51deg 87.52deg auto">Anterior</button>
+
+        </div>
+
+        <div class=position-controls>
+            <button class=position-button data-orbit="94.81deg 22.5deg auto">Base</button>
+            <button class=position-button data-orbit="90.3deg 157.5deg auto">Apex</button>
+        </div>
+
+    </section>
+
+    <section id="transparency">
+
+
+        <h3><strong>Transparency</strong></h3>
+
+        <container id="sliders">
+            <table>
+
+                <tr>
+                    <td>
+                        <p>SUV10:</p>
+                    </td>
+                    <td><input id="alpha-one" type="range" min="0" max="1" step="0.01" value="0.5"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>SUV004:</p>
+                    </td>
+                    <td><input id="alpha-two" type="range" min="0" max="1" step="0.01" value="0.5"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Prostate:</p>
+                    </td>
+                    <td><input id="alpha-three" type="range" min="0" max="1" step="0.01" value="0.5"></td>
+                </tr>
+            </table>
+            
+        
+        </container>
+
+    </section>
+
+
+    <script type="module">
+        const modelViewer = document.querySelector("#prostateModel");
+        const annotationClicked = (annotation) => {
+            let dataset = annotation.dataset;
+            modelViewer.cameraTarget = dataset.target;
+            modelViewer.cameraOrbit = dataset.orbit;
+
+        }
+        const buttonSection = document.querySelector("#position")
+        buttonSection.querySelectorAll('button').forEach((hotspot) => {
+            hotspot.addEventListener('click', () => annotationClicked(hotspot));
+        });
+
+
+
+
+        let materialOne
+        let materialTwo
+        let materialThree
+
+
+        const modelViewerTrans = document.querySelector("model-viewer#prostateModel");
+
+        modelViewer.addEventListener("load", () => {
+
+            materialOne = modelViewer.model.getMaterialByName("Material.001");
+            materialOne.setAlphaMode("BLEND");
+            // Defaults to base colour
+            materialOne.pbrMetallicRoughness.setBaseColorFactor([0.8, 0.02, 0.5,0.5]);
+            // Adds slider interactivity
+            document.querySelector('#alpha-one').addEventListener('input', (event) => {
+                materialOne.pbrMetallicRoughness.setBaseColorFactor([0.8, 0.02, 0.5, (event.target.value)]);
+            });
+
+            materialTwo = modelViewer.model.getMaterialByName("Material.002");
+            materialTwo.setAlphaMode("BLEND");
+            // Default to base colour
+            materialTwo.pbrMetallicRoughness.setBaseColorFactor([0.8, 0.5, 0.8, 0.5]);
+            // Adds slider interactivity
+            document.querySelector('#alpha-two').addEventListener('input', (event) => {
+                materialTwo.pbrMetallicRoughness.setBaseColorFactor([0.8, 0.5, 0.8, (event.target.value)]);
+            });
+            
+            materialThree = modelViewer.model.getMaterialByName("Material.003");
+            materialThree.setAlphaMode("BLEND");
+            // Defaults to base colour
+            materialThree.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 0.3]);
+            // Adds slider interactivity
+              document.querySelector('#alpha-three').addEventListener('input', (event) => {
+                materialThree.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, (event.target.value)]);
+            });
+
+            console.log(modelViewer.model.materials);
+
+
+        });
+
+    </script>
+
+</body></html>
